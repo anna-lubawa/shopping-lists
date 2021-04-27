@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightBackgroundColor"
-    tools:context=".ui.CurrentShoppingListsFragment">
+    tools:context=".ui.current.CurrentShoppingListsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/shoppingListsRecyclerView"

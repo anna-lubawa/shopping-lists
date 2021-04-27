@@ -1,4 +1,4 @@
-package com.annalubawa.shoppinglists.ui
+package com.annalubawa.shoppinglists.ui.archived
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -5,23 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.annalubawa.shoppinglists.databinding.FragmentItemsListBinding
+import com.annalubawa.shoppinglists.databinding.FragmentShoppingListsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ItemsListFragment : Fragment() {
+class ShoppingListsFragment : Fragment() {
 
-    private lateinit var binding: FragmentItemsListBinding
+    private lateinit var binding: FragmentShoppingListsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                      savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View? {
 
-        binding = FragmentItemsListBinding.inflate(inflater, container, false)
+        binding = FragmentShoppingListsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     companion object {
         @JvmStatic
-        fun newInstance() = ItemsListFragment()
+        fun newInstance() = ShoppingListsFragment()
     }
 }
