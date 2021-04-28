@@ -2,33 +2,31 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav"
     app:startDestination="@id/shoppingListsFragment2">
+
+    <action android:id="@+id/action_global_itemsListFragment" app:destination="@id/itemsListFragment" />
+
     <fragment
         android:id="@+id/currentShoppingListsFragment"
         android:name="com.annalubawa.shoppinglists.ui.current.CurrentShoppingListsFragment"
-        android:label="CurrentShoppingListsFragment" >
-        <action
-            android:id="@+id/action_currentShoppingListsFragment_to_itemsListFragment"
-            app:destination="@id/itemsListFragment" />
-    </fragment>
+        android:label="CurrentShoppingListsFragment" />
     <fragment
         android:id="@+id/itemsListFragment"
         android:name="com.annalubawa.shoppinglists.ui.items.ItemsListFragment"
         android:label="ItemsListFragment" >
-        <action
-            android:id="@+id/action_itemsListFragment_to_currentShoppingListsFragment"
-            app:destination="@id/currentShoppingListsFragment" />
-        <action
-            android:id="@+id/action_itemsListFragment_to_archivedShoppingListsFragment"
-            app:destination="@id/archivedShoppingListsFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="archived"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/archivedShoppingListsFragment"
         android:name="com.annalubawa.shoppinglists.ui.archived.ArchivedShoppingListsFragment"
-        android:label="ArchivedShoppingListsFragment" >
-        <action
-            android:id="@+id/action_archivedShoppingListsFragment_to_itemsListFragment"
-            app:destination="@id/itemsListFragment" />
-    </fragment>
+        android:label="ArchivedShoppingListsFragment" />
     <fragment
         android:id="@+id/shoppingListsFragment2"
         android:name="com.annalubawa.shoppinglists.ui.ShoppingListsFragment"
