@@ -10,7 +10,17 @@ interface ShoppingListRepository {
 
     suspend fun deleteShoppingList(shoppingList: ShoppingList)
 
-    suspend fun archiveShoppingList(shoppingList: ShoppingList)
+    suspend fun archiveShoppingList(shoppingListId: Int)
+
+    suspend fun unarchiveShoppingList(shoppingListId: Int)
+
+    suspend fun incrementBoughtItems(shoppingListId: Int)
+
+    suspend fun decrementBoughtItems(shoppingListId: Int)
+
+    suspend fun incrementTotalItems(shoppingListId: Int)
+
+    suspend fun decrementTotalItems(shoppingListId: Int)
 
     suspend fun getCurrentShoppingLists() : Flow<List<ShoppingList>>
 

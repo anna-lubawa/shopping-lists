@@ -13,8 +13,23 @@ interface ShoppingListDao {
     @Delete
     suspend fun deleteShoppingList(shoppingList: ShoppingListEntity)
 
-    @Update
-    suspend fun updateShoppingList(shoppingList: ShoppingListEntity)
+    @Query("UPDATE shopping_lists SET archived = 1 WHERE id = :id")
+    suspend fun archiveShoppingList(id: Int)
+
+    @Query("UPDATE shopping_lists SET archived = 0 WHERE id = :id")
+    suspend fun unarchiveShoppingList(id: Int)
+
+    @Query("UPDATE shopping_lists SET boughtItemsCount = boughtItemsCount + 1 WHERE id = :id")
+    suspend fun incrementBoughtItems(id: Int)
+
+    @Query("UPDATE shopping_lists SET boughtItemsCount = boughtItemsCount - 1 WHERE id = :id")
+    suspend fun decrementBoughtItems(id: Int)
+
+    @Query("UPDATE shopping_lists SET totalItemsCount = totalItemsCount + 1 WHERE id = :id")
+    suspend fun incrementTotalItems(id: Int)
+
+    @Query("UPDATE shopping_lists SET totalItemsCount = totalItemsCount - 1 WHERE id = :id")
+    suspend fun decrementTotalItems(id: Int)
 
     @Query("SELECT * FROM shopping_lists WHERE archived = 0 ORDER BY added ASC")
     fun getCurrentShoppingLists() : Flow<List<ShoppingListEntity>>

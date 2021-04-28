@@ -21,19 +21,40 @@ class ShoppingListRepositoryImpl @Inject constructor(
         shoppingListDao.deleteShoppingList(mapper.toShoppingListEntity(shoppingList))
     }
 
-    override suspend fun archiveShoppingList(shoppingList: ShoppingList) {
-        shoppingList.archived = true
-        shoppingListDao.updateShoppingList(mapper.toShoppingListEntity(shoppingList))
+    override suspend fun archiveShoppingList(shoppingListId: Int) {
+        shoppingListDao.archiveShoppingList(shoppingListId)
+    }
+
+    override suspend fun unarchiveShoppingList(shoppingListId: Int) {
+        shoppingListDao.unarchiveShoppingList(shoppingListId)
+    }
+
+    override suspend fun incrementBoughtItems(shoppingListId: Int) {
+        shoppingListDao.incrementBoughtItems(shoppingListId)
+    }
+
+    override suspend fun decrementBoughtItems(shoppingListId: Int) {
+        shoppingListDao.decrementBoughtItems(shoppingListId)
+    }
+
+    override suspend fun incrementTotalItems(shoppingListId: Int) {
+        shoppingListDao.incrementTotalItems(shoppingListId)
+    }
+
+    override suspend fun decrementTotalItems(shoppingListId: Int) {
+        shoppingListDao.decrementTotalItems(shoppingListId)
     }
 
     override suspend fun getCurrentShoppingLists(): Flow<List<ShoppingList>> {
-        return shoppingListDao.getCurrentShoppingLists().map {  mapper.toShoppingLists(it) }
+        return shoppingListDao.getCurrentShoppingLists()
+            .map {  mapper.toShoppingLists(it) }
             .catch { emit(emptyList()) }
             .flowOn(Dispatchers.IO)
     }
 
     override suspend fun getArchivedShoppingLists(): Flow<List<ShoppingList>> {
-        return shoppingListDao.getArchivedShoppingLists().map {  mapper.toShoppingLists(it) }
+        return shoppingListDao.getArchivedShoppingLists()
+            .map {  mapper.toShoppingLists(it) }
             .catch { emit(emptyList()) }
             .flowOn(Dispatchers.IO)
     }
