@@ -2,8 +2,9 @@ package com.annalubawa.shoppinglists.data.mapper
 
 import com.annalubawa.shoppinglists.data.db.entity.ItemEntity
 import com.annalubawa.shoppinglists.domain.model.Item
+import javax.inject.Inject
 
-class ItemMapper {
+class ItemMapper @Inject constructor() {
 
     fun toItemEntity(item: Item) = ItemEntity(
         item.id,

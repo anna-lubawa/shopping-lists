@@ -11,6 +11,10 @@ interface ItemRepository {
 
     suspend fun buyItem(item: Item)
 
+    suspend fun undoBuyItem(item: Item)
+
+    suspend fun deleteItems(shoppingListId: Int)
+
     fun getItems(shoppingListId: Int) : Flow<List<Item>>
 
 }

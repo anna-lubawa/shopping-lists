@@ -29,8 +29,18 @@ class ItemRepositoryImpl @Inject constructor(
         itemDao.updateItem(mapper.toItemEntity(item))
     }
 
+    override suspend fun undoBuyItem(item: Item) {
+        item.bought = false
+        itemDao.updateItem(mapper.toItemEntity(item))
+    }
+
+    override suspend fun deleteItems(shoppingListId: Int) {
+        itemDao.deleteItems(shoppingListId)
+    }
+
     override fun getItems(shoppingListId: Int): Flow<List<Item>> {
-        return itemDao.getItems(shoppingListId).map {  mapper.toItems(it) }
+        return itemDao.getItems(shoppingListId)
+            .map {  mapper.toItems(it) }
             .catch { emit(emptyList()) }
             .flowOn(Dispatchers.IO)
     }
