@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.annalubawa.shoppinglists.domain.model.ShoppingList
+import com.annalubawa.shoppinglists.domain.repository.ItemRepository
 import com.annalubawa.shoppinglists.domain.repository.ShoppingListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CurrentShoppingListsViewModel @Inject constructor(
-    private val repository: ShoppingListRepository
+    private val shoppingListRepository: ShoppingListRepository,
+    private val itemRepository: ItemRepository
 ) : ViewModel() {
 
     private var _currentShoppingLists = MutableLiveData<List<ShoppingList>>()
@@ -23,7 +25,7 @@ class CurrentShoppingListsViewModel @Inject constructor(
     fun getCurrentShoppingLists()
     {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getCurrentShoppingLists().collect { shoppingLists ->
+            shoppingListRepository.getCurrentShoppingLists().collect { shoppingLists ->
                 _currentShoppingLists.postValue(shoppingLists)
             }
         }
@@ -35,21 +37,16 @@ class CurrentShoppingListsViewModel @Inject constructor(
             false, System.currentTimeMillis())
 
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addShoppingList(shoppingList)
+            shoppingListRepository.addShoppingList(shoppingList)
         }
     }
 
     fun deleteShoppingList(shoppingList: ShoppingList)
     {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteShoppingList(shoppingList)
+            shoppingListRepository.deleteShoppingList(shoppingList)
+            itemRepository.deleteItems(shoppingList.id)
         }
     }
 
-    fun archiveShoppingList(shoppingList: ShoppingList)
-    {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.archiveShoppingList(shoppingList)
-        }
-    }
 }

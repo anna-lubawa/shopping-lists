@@ -10,18 +10,25 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.annalubawa.shoppinglists.R
 import com.annalubawa.shoppinglists.databinding.FragmentCurrentShoppingListsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
+import com.annalubawa.shoppinglists.domain.model.ShoppingList
+import com.annalubawa.shoppinglists.ui.ShoppingListsRecyclerAdapter
+import com.annalubawa.shoppinglists.ui.archived.ArchivedShoppingListsFragmentDirections
 
 
 @AndroidEntryPoint
-class CurrentShoppingListsFragment : Fragment() {
+class CurrentShoppingListsFragment : Fragment(), ShoppingListsRecyclerAdapter.ShoppingListListener {
 
     private lateinit var binding: FragmentCurrentShoppingListsBinding
     private lateinit var viewModel: CurrentShoppingListsViewModel
+    private lateinit var navController : NavController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -33,9 +40,22 @@ class CurrentShoppingListsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initNavigation(view)
         initViewModel()
+        initRecyclerView()
         setOnClickListeners()
         setObservers()
+
+        viewModel.getCurrentShoppingLists()
+    }
+
+    private fun initRecyclerView() {
+        binding.shoppingListsRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+    }
+
+    private fun initNavigation(view: View) {
+        navController = Navigation.findNavController(requireActivity(), R.id.shoppingListsViewPager)
     }
 
     private fun initViewModel() {
@@ -51,7 +71,9 @@ class CurrentShoppingListsFragment : Fragment() {
 
     private fun setObservers() {
         viewModel.currentShoppingLists.observe(viewLifecycleOwner, Observer { shoppingLists ->
-            shoppingLists.forEach { Log.i("INFO ", it.name) }
+            shoppingLists.forEach { Log.i("CURRENT ", it.name) }
+            binding.shoppingListsRecyclerView.adapter =
+                ShoppingListsRecyclerAdapter(viewModel.currentShoppingLists.value!!, this)
         })
     }
 
@@ -63,8 +85,11 @@ class CurrentShoppingListsFragment : Fragment() {
 
         dialog.findViewById<Button>(R.id.dialogShoppingListAddButton).setOnClickListener {
             val name = dialog.findViewById<EditText>(R.id.dialogShoppingListEditText).text.toString()
-            viewModel.addShoppingList(name)
-            viewModel.getCurrentShoppingLists()
+
+            if(name.isNotBlank()) {
+                viewModel.addShoppingList(name)
+            }
+
             dialog.dismiss()
         }
 
@@ -73,6 +98,16 @@ class CurrentShoppingListsFragment : Fragment() {
         }
 
         dialog.show()
+    }
+
+    override fun onClick(shoppingList: ShoppingList) {
+        val action = ArchivedShoppingListsFragmentDirections
+            .actionGlobalItemsListFragment(shoppingList.id, shoppingList.name, shoppingList.archived)
+        navController.navigate(action)
+    }
+
+    override fun onLongClick(shoppingList: ShoppingList) {
+
     }
 
     companion object {
