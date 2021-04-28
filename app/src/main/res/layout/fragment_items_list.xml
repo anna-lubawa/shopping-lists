@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.annalubawa.shoppinglists.ui.items.ItemsViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,6 +28,7 @@
             android:textStyle="bold"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@{viewmodel.shoppingListName}"
             app:layout_constraintEnd_toStartOf="@+id/archiveListIcon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +59,7 @@
             tools:listitem="@layout/item_element" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/addItemActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -63,6 +70,7 @@
             app:backgroundTint="@color/primaryColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:actionButtonVisibilityBinding="@{viewmodel.archived}"
             app:tint="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

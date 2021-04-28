@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="item"
+            type="com.annalubawa.shoppinglists.domain.model.Item" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -32,6 +38,7 @@
                     app:cardBackgroundColor="@color/secondaryLightColor"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
+                    app:cardViewBinding="@{item.bought}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -66,6 +73,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/checkIcon"
                     app:layout_constraintStart_toEndOf="@+id/itemIconCardView"
                     app:layout_constraintTop_toTopOf="@+id/itemIconCardView"
+                    android:text="@{item.name}"
                     tools:text="Item" />
 
                 <TextView
@@ -73,7 +81,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Quantity:"
+                    android:text="@string/quantity2"
                     android:textColor="@color/darkGray"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/itemIconCardView"
@@ -91,6 +99,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/quantityTextTextView"
                     app:layout_constraintStart_toEndOf="@+id/quantityTextTextView"
                     app:layout_constraintTop_toBottomOf="@+id/itemNameTextView"
+                    app:integerTextBinding="@{item.quantity}"
                     tools:text="3" />
 
                 <View
@@ -110,8 +119,9 @@
                     app:layout_constraintBottom_toBottomOf="@+id/itemIconCardView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/itemIconCardView"
-                    app:srcCompat="@drawable/ic_check"
-                    app:tint="@color/darkGray" />
+                    tools:srcCompat="@drawable/ic_check"
+                    app:tint="@color/darkGray"
+                    app:checkIconBinding="@{item.bought}"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
