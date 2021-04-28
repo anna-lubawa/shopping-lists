@@ -6,6 +6,7 @@
     <color name="primaryColor">#024549</color>
     <color name="primaryLightColor">#397174</color>
     <color name="primaryDarkColor">#001e22</color>
+    <color name="primaryLightColorVariant">#044F53</color>
 
     <color name="secondaryColor">#ff96a2</color>
     <color name="secondaryLightColor">#ffc8d3</color>
@@ -16,5 +17,5 @@
 
     <color name="darkGray">#3C3C3C</color>
     <color name="lightGreen">#8BDDB0</color>
-    <color name="lightBackgroundColor">#f5f5f6</color>
+    <color name="lightBackgroundColor">#DADADA</color>
 </resources>
