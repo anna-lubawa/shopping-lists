@@ -5,8 +5,11 @@ import androidx.room.Room
 import com.annalubawa.shoppinglists.data.db.AppDatabase
 import com.annalubawa.shoppinglists.data.db.dao.ItemDao
 import com.annalubawa.shoppinglists.data.db.dao.ShoppingListDao
+import com.annalubawa.shoppinglists.data.mapper.ItemMapper
 import com.annalubawa.shoppinglists.data.mapper.ShoppingListMapper
+import com.annalubawa.shoppinglists.data.repository.ItemRepositoryImpl
 import com.annalubawa.shoppinglists.data.repository.ShoppingListRepositoryImpl
+import com.annalubawa.shoppinglists.domain.repository.ItemRepository
 import com.annalubawa.shoppinglists.domain.repository.ShoppingListRepository
 import dagger.Module
 import dagger.Provides
@@ -44,4 +47,9 @@ class AppModule {
     @Provides
     fun provideShoppingListRepository(shoppingListDao: ShoppingListDao, mapper: ShoppingListMapper) : ShoppingListRepository =
         ShoppingListRepositoryImpl(shoppingListDao, mapper)
+
+    @Singleton
+    @Provides
+    fun provideItemsRepository(itemDao: ItemDao, mapper: ItemMapper) : ItemRepository =
+        ItemRepositoryImpl(itemDao, mapper)
 }

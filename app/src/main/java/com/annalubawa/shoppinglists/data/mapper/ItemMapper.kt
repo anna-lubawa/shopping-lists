@@ -21,4 +21,12 @@ class ItemMapper {
         itemEntity.bought
     )
 
+    fun toItemEntities(items: List<Item>) : List<ItemEntity> {
+        return items.map { toItemEntity(it) }
+    }
+
+    fun toItems(itemEntities: List<ItemEntity>) : List<Item> {
+        return itemEntities.map { toItem(it) }
+    }
+
 }

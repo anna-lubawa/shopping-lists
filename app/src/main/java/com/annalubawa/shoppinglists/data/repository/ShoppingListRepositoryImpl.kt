@@ -10,7 +10,8 @@ import javax.inject.Inject
 
 class ShoppingListRepositoryImpl @Inject constructor(
     private val shoppingListDao: ShoppingListDao,
-    private val mapper: ShoppingListMapper) : ShoppingListRepository {
+    private val mapper: ShoppingListMapper
+) : ShoppingListRepository {
 
     override suspend fun addShoppingList(shoppingList: ShoppingList) {
         shoppingListDao.addShoppingList(mapper.toShoppingListEntity(shoppingList))
