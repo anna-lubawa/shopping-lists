@@ -100,6 +100,24 @@ class CurrentShoppingListsFragment : Fragment(), ShoppingListsRecyclerAdapter.Sh
         dialog.show()
     }
 
+    private fun showDeleteListDialog(shoppingList: ShoppingList) {
+        val dialog = MaterialDialog(requireContext())
+                .noAutoDismiss()
+                .customView(R.layout.delete_list_dialog)
+
+        dialog.findViewById<Button>(R.id.dialogDeleteListDeleteButton).setOnClickListener {
+            viewModel.deleteShoppingList(shoppingList)
+
+            dialog.dismiss()
+        }
+
+        dialog.findViewById<Button>(R.id.dialogDeleteListCancelButton).setOnClickListener {
+            dialog.cancel()
+        }
+
+        dialog.show()
+    }
+
     override fun onClick(shoppingList: ShoppingList) {
         val action = ArchivedShoppingListsFragmentDirections
             .actionGlobalItemsListFragment(shoppingList.id, shoppingList.name, shoppingList.archived)
@@ -107,7 +125,7 @@ class CurrentShoppingListsFragment : Fragment(), ShoppingListsRecyclerAdapter.Sh
     }
 
     override fun onLongClick(shoppingList: ShoppingList) {
-
+        showDeleteListDialog(shoppingList)
     }
 
     companion object {

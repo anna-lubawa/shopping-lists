@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -19,8 +18,6 @@ import com.afollestad.materialdialogs.customview.customView
 import com.annalubawa.shoppinglists.R
 import com.annalubawa.shoppinglists.databinding.FragmentItemsListBinding
 import com.annalubawa.shoppinglists.domain.model.Item
-import com.annalubawa.shoppinglists.ui.ShoppingListsRecyclerAdapter
-import com.annalubawa.shoppinglists.ui.current.CurrentShoppingListsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -94,7 +91,7 @@ class ItemsListFragment : Fragment(), ItemsRecyclerAdapter.ItemClickListener {
     }
 
     override fun onLongClick(item: Item) {
-        Toast.makeText(context, "Long click", Toast.LENGTH_SHORT).show()
+        showDeleteItemDialog(item)
     }
 
     override fun onCheckIconClick(item: Item) {
@@ -124,6 +121,24 @@ class ItemsListFragment : Fragment(), ItemsRecyclerAdapter.ItemClickListener {
         }
 
         dialog.findViewById<Button>(R.id.dialogItemCancelButton).setOnClickListener {
+            dialog.cancel()
+        }
+
+        dialog.show()
+    }
+
+    private fun showDeleteItemDialog(item: Item) {
+        val dialog = MaterialDialog(requireContext())
+                .noAutoDismiss()
+                .customView(R.layout.delete_item_dialog)
+
+        dialog.findViewById<Button>(R.id.dialogDeleteItemDeleteButton).setOnClickListener {
+            viewModel.deleteItem(item)
+
+            dialog.dismiss()
+        }
+
+        dialog.findViewById<Button>(R.id.dialogDeleteItemCancelButton).setOnClickListener {
             dialog.cancel()
         }
 

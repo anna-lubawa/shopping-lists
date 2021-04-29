@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.annalubawa.shoppinglists.R
 import com.annalubawa.shoppinglists.databinding.FragmentArchivedShoppingListsBinding
 import com.annalubawa.shoppinglists.domain.model.ShoppingList
@@ -62,6 +65,24 @@ class ArchivedShoppingListsFragment : Fragment(), ShoppingListsRecyclerAdapter.S
         })
     }
 
+    private fun showDeleteListDialog(shoppingList: ShoppingList) {
+        val dialog = MaterialDialog(requireContext())
+                .noAutoDismiss()
+                .customView(R.layout.delete_list_dialog)
+
+        dialog.findViewById<Button>(R.id.dialogDeleteListDeleteButton).setOnClickListener {
+            viewModel.deleteShoppingList(shoppingList)
+
+            dialog.dismiss()
+        }
+
+        dialog.findViewById<Button>(R.id.dialogDeleteListCancelButton).setOnClickListener {
+            dialog.cancel()
+        }
+
+        dialog.show()
+    }
+
     override fun onClick(shoppingList: ShoppingList) {
         val action = ArchivedShoppingListsFragmentDirections
             .actionGlobalItemsListFragment(shoppingList.id, shoppingList.name, shoppingList.archived)
@@ -69,7 +90,7 @@ class ArchivedShoppingListsFragment : Fragment(), ShoppingListsRecyclerAdapter.S
     }
 
     override fun onLongClick(shoppingList: ShoppingList) {
-
+        showDeleteListDialog(shoppingList)
     }
 
     companion object {

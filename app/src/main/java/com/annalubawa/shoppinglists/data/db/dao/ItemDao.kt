@@ -17,7 +17,7 @@ interface ItemDao {
     suspend fun updateItem(item: ItemEntity)
 
     @Query("DELETE FROM items WHERE shoppingListId = :shoppingListId")
-    fun deleteItems(shoppingListId: Int)
+    suspend fun deleteItems(shoppingListId: Int)
 
     @Query("SELECT * FROM items WHERE shoppingListId = :shoppingListId")
     fun getItems(shoppingListId: Int) : Flow<List<ItemEntity>>
