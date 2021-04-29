@@ -7,53 +7,52 @@
     android:background="@color/white">
 
     <TextView
-        android:id="@+id/dialogShoppingListTitle"
+        android:id="@+id/dialogDeleteItemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/add_new_shopping_list"
+        android:text="@string/delete_item"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/dialogShoppingListEditText"
+    <TextView
+        android:id="@+id/dialogDeleteItemTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="@string/name"
-        android:inputType="textPersonName"
+        android:text="@string/are_you_sure_you_want_to_delete_this_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialogShoppingListTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/dialogDeleteItemTitle" />
 
     <Button
-        android:id="@+id/dialogShoppingListAddButton"
+        android:id="@+id/dialogDeleteItemDeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/add"
+        android:backgroundTint="@color/warningRed"
+        android:text="@string/delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialogShoppingListEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/dialogDeleteItemTextView" />
 
     <Button
-        android:id="@+id/dialogShoppingListCancelButton"
+        android:id="@+id/dialogDeleteItemCancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/cancelGray"
         android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="@+id/dialogShoppingListAddButton"
-        app:layout_constraintEnd_toStartOf="@+id/dialogShoppingListAddButton"
-        app:layout_constraintTop_toTopOf="@+id/dialogShoppingListAddButton" />
+        app:layout_constraintBottom_toBottomOf="@+id/dialogDeleteItemDeleteButton"
+        app:layout_constraintEnd_toStartOf="@+id/dialogDeleteItemDeleteButton"
+        app:layout_constraintTop_toTopOf="@+id/dialogDeleteItemDeleteButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

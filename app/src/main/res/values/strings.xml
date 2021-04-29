@@ -10,4 +10,9 @@
     <string name="quantity">Quantity</string>
     <string name="add_new_item">Add new item</string>
     <string name="quantity2">Quantity:</string>
+    <string name="are_you_sure_you_want_to_delete_this_item">Are you sure you want to delete this item?</string>
+    <string name="delete">Delete</string>
+    <string name="delete_item">Delete item</string>
+    <string name="delete_shopping_list">Delete shopping list</string>
+    <string name="are_you_sure_you_want_to_delete_this_shopping_list">Are you sure you want to delete this shopping list?</string>
 </resources>

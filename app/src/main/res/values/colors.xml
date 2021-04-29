@@ -17,5 +17,7 @@
 
     <color name="darkGray">#3C3C3C</color>
     <color name="lightGreen">#8BDDB0</color>
+    <color name="warningRed">#933535</color>
+    <color name="cancelGray">#C8C8C8</color>
     <color name="lightBackgroundColor">#DADADA</color>
 </resources>
