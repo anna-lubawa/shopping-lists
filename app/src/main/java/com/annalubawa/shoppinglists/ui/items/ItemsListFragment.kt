@@ -83,7 +83,7 @@ class ItemsListFragment : Fragment(), ItemsRecyclerAdapter.ItemClickListener {
     private fun initObservers() {
         viewModel.items.observe(viewLifecycleOwner, Observer { items ->
             binding.itemsListRecyclerView.adapter =
-                ItemsRecyclerAdapter(viewModel.items.value!!, this)
+                    ItemsRecyclerAdapter(viewModel.items.value!!, this)
         })
 
         viewModel.archived.observe(viewLifecycleOwner, Observer { archived ->
