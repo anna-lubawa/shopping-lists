@@ -35,7 +35,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="18dp"
-                    app:cardBackgroundColor="@color/secondaryLightColor"
+                    app:cardBackgroundColor="@color/lightRed"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
                     app:cardViewBinding="@{item.bought}"

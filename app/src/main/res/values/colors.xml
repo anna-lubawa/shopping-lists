@@ -3,22 +3,27 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primaryColor">#024549</color>
-    <color name="primaryLightColor">#397174</color>
-    <color name="primaryDarkColor">#001e22</color>
-    <color name="primaryLightColorVariant">#044F53</color>
+    <color name="primaryColor">#0D203E</color>
+    <color name="primaryLightColor">#446183</color>
+    <color name="primaryDarkColor">#00112d</color>
 
-    <color name="secondaryColor">#ff96a2</color>
-    <color name="secondaryLightColor">#ffc8d3</color>
-    <color name="secondaryDarkColor">#c96673</color>
+    <color name="secondaryColor">#ffbd8f</color>
+    <color name="secondaryLightColor">#fff0c0</color>
+    <color name="secondaryDarkColor">#ca8d61</color>
 
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
 
     <color name="darkGray">#3C3C3C</color>
     <color name="gray">#787878</color>
+
+    <color name="lightRed">#DD8B8B</color>
+    <color name="Red">#9F5656</color>
     <color name="lightGreen">#8BDDB0</color>
-    <color name="warningRed">#933535</color>
+    <color name="green">#4F9E73</color>
+
+    <color name="deleteRed">#933535</color>
     <color name="cancelGray">#C8C8C8</color>
+
     <color name="lightBackgroundColor">#DADADA</color>
 </resources>

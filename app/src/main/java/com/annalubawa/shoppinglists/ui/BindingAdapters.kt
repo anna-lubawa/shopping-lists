@@ -25,27 +25,27 @@ fun loadCheckIcon(view: ImageView, bought: Boolean) {
 }
 
 @BindingAdapter("cardViewBinding")
-fun loadCheckIcon(view: CardView, bought: Boolean) {
+fun loadCardView(view: CardView, bought: Boolean) {
     if (bought)
         view.setCardBackgroundColor(Color.argb(255, 139, 221, 176))
     else
-        view.setCardBackgroundColor(Color.argb(255, 255, 200, 211))
+        view.setCardBackgroundColor(Color.argb(255, 221, 139, 139))
 }
 
 @BindingAdapter("cardViewShoppingListBinding")
-fun loadCheckIcon(view: CardView, shoppingList: ShoppingList) {
+fun loadCardView(view: CardView, shoppingList: ShoppingList) {
     if (shoppingList.totalItemsCount != 0 && shoppingList.boughtItemsCount == shoppingList.totalItemsCount)
         view.setCardBackgroundColor(Color.argb(255, 139, 221, 176))
     else
-        view.setCardBackgroundColor(Color.argb(255, 255, 200, 211))
+        view.setCardBackgroundColor(Color.argb(255, 221, 139, 139))
 }
 
 @BindingAdapter("quantityTextBinding")
 fun loadInteger(view: TextView, shoppingList: ShoppingList) {
     if(shoppingList.totalItemsCount != 0 && shoppingList.boughtItemsCount == shoppingList.totalItemsCount)
-        view.setTextColor(Color.argb(255, 139, 221, 176))
+        view.setTextColor(Color.argb(255, 79, 158, 115))
     else
-        view.setTextColor(Color.argb(255, 201, 102, 115))
+        view.setTextColor(Color.argb(255, 159, 86, 86))
 
     view.text = "${shoppingList.boughtItemsCount}/${shoppingList.totalItemsCount}"
 }
