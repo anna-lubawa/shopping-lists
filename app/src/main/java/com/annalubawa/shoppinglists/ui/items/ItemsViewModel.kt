@@ -22,10 +22,21 @@ class ItemsViewModel @Inject constructor(
 
     var shoppingListId: Int? = null
     var shoppingListName: String? = null
-    var archived: Boolean? = null
+
+    private var _archived = MutableLiveData<Boolean>()
+    val archived: LiveData<Boolean> = _archived
 
     private var _items = MutableLiveData<List<Item>>()
     val items: LiveData<List<Item>> = _items
+
+    fun initValues(shoppingListId: Int, shoppingListName: String, archived: Boolean)
+    {
+        this.shoppingListId = shoppingListId
+        this.shoppingListName = shoppingListName
+
+        if(_archived.value == null)
+            _archived.value = archived
+    }
 
     fun getItems() {
         shoppingListId?.let { id ->
@@ -53,28 +64,42 @@ class ItemsViewModel @Inject constructor(
     }
 
     fun buyItem(item: Item) {
-        viewModelScope.launch(Dispatchers.IO) {
-            itemsRepository.buyItem(item)
-            shoppingListRepository.incrementBoughtItems(shoppingListId!!)
+        if(!archived.value!!) {
+            viewModelScope.launch(Dispatchers.IO) {
+                itemsRepository.buyItem(item)
+                shoppingListRepository.incrementBoughtItems(shoppingListId!!)
+            }
         }
     }
 
     fun undoBuyItem(item: Item) {
-        viewModelScope.launch(Dispatchers.IO) {
-            itemsRepository.undoBuyItem(item)
-            shoppingListRepository.decrementBoughtItems(shoppingListId!!)
+        if(!archived.value!!) {
+            viewModelScope.launch(Dispatchers.IO) {
+                itemsRepository.undoBuyItem(item)
+                shoppingListRepository.decrementBoughtItems(shoppingListId!!)
+            }
         }
     }
 
-    fun archiveShoppingList()
+    fun archiveOrUnarchiveShoppingList()
     {
+        if(archived.value!!)
+            unarchiveShoppingList()
+        else
+            archiveShoppingList()
+    }
+
+    private fun archiveShoppingList()
+    {
+        _archived.value = true
         viewModelScope.launch(Dispatchers.IO) {
             shoppingListRepository.archiveShoppingList(shoppingListId!!)
         }
     }
 
-    fun unarchiveShoppingList()
+    private fun unarchiveShoppingList()
     {
+        _archived.value = false
         viewModelScope.launch(Dispatchers.IO) {
             shoppingListRepository.unarchiveShoppingList(shoppingListId!!)
         }

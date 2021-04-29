@@ -1,4 +1,4 @@
-package com.annalubawa.shoppinglists.ui.items
+package com.annalubawa.shoppinglists.ui
 
 import android.graphics.Color
 import android.view.View
@@ -56,4 +56,20 @@ fun loadFloatingActionButton(view: FloatingActionButton, archived: Boolean) {
         view.visibility = View.INVISIBLE
     else
         view.visibility = View.VISIBLE
+}
+
+@BindingAdapter("archiveIconBinding")
+fun loadArchiveIcon(view: ImageView, archived: Boolean) {
+    if (archived)
+        view.setImageResource(R.drawable.ic_unarchive)
+    else
+        view.setImageResource(R.drawable.ic_archive)
+}
+
+@BindingAdapter("archiveTextBinding")
+fun loadArchiveText(view: TextView, archived: Boolean) {
+    if (archived)
+        view.setText(R.string.unarchive)
+    else
+        view.setText(R.string.archive)
 }

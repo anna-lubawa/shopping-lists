@@ -15,4 +15,9 @@
     <string name="delete_item">Delete item</string>
     <string name="delete_shopping_list">Delete shopping list</string>
     <string name="are_you_sure_you_want_to_delete_this_shopping_list">Are you sure you want to delete this shopping list?</string>
+    <string name="unarchive">Unarchive</string>
+    <string name="archive">Archive</string>
+    <string name="add_item_button">Add item button</string>
+    <string name="archive_unarchive_button">Archive/unarchive button</string>
+    <string name="add_shopping_list_button">Add shopping list button</string>
 </resources>

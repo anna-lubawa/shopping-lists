@@ -21,17 +21,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{viewmodel.shoppingListName}"
-            app:layout_constraintEnd_toStartOf="@+id/archiveListIcon"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/archiveTextView"
+            app:layout_constraintEnd_toStartOf="@+id/archiveTextView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/archiveListIcon"
             tools:text="My shopping list" />
 
         <ImageView
@@ -39,11 +39,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            app:tint="@color/primaryColor"
+            android:layout_marginEnd="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_archive" />
+            tools:srcCompat="@drawable/ic_archive"
+            app:archiveIconBinding="@{viewmodel.archived}"
+            android:contentDescription="@string/archive_unarchive_button" />
+
+        <TextView
+            android:id="@+id/archiveTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primaryColor"
+            app:layout_constraintEnd_toEndOf="@+id/archiveListIcon"
+            app:layout_constraintStart_toStartOf="@+id/archiveListIcon"
+            app:layout_constraintTop_toBottomOf="@+id/archiveListIcon"
+            tools:text="Archive"
+            app:archiveTextBinding="@{viewmodel.archived}"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/itemsListRecyclerView"
@@ -55,7 +67,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listNameTextView"
+            app:layout_constraintTop_toBottomOf="@+id/archiveTextView"
             tools:listitem="@layout/item_element" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -71,7 +83,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:actionButtonVisibilityBinding="@{viewmodel.archived}"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            android:contentDescription="@string/add_item_button" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -41,7 +41,8 @@
         app:backgroundTint="@color/primaryColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_add"
+        android:contentDescription="@string/add_shopping_list_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

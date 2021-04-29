@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -54,11 +55,10 @@ class ItemsListFragment : Fragment(), ItemsRecyclerAdapter.ItemClickListener {
     private fun initViewModel()
     {
         viewModel = ViewModelProvider(this).get(ItemsViewModel::class.java)
-        viewModel.shoppingListId = args.id
-        viewModel.shoppingListName = args.name
-        viewModel.archived = args.archived
+        viewModel.initValues(args.id, args.name, args.archived)
 
         binding.viewmodel = viewModel
+        binding.lifecycleOwner = this
     }
 
     private fun initRecyclerView() {
@@ -72,14 +72,11 @@ class ItemsListFragment : Fragment(), ItemsRecyclerAdapter.ItemClickListener {
         }
 
         binding.archiveListIcon.setOnClickListener {
-            if(viewModel.archived!!) {
-                viewModel.unarchiveShoppingList()
-                viewModel.archived = false;
-            }
-            else {
-                viewModel.archiveShoppingList()
-                viewModel.archived = true;
-            }
+            viewModel.archiveOrUnarchiveShoppingList()
+        }
+
+        binding.archiveTextView.setOnClickListener {
+            viewModel.archiveOrUnarchiveShoppingList()
         }
     }
 
@@ -88,23 +85,28 @@ class ItemsListFragment : Fragment(), ItemsRecyclerAdapter.ItemClickListener {
             binding.itemsListRecyclerView.adapter =
                 ItemsRecyclerAdapter(viewModel.items.value!!, this)
         })
+
+        viewModel.archived.observe(viewLifecycleOwner, Observer { archived ->
+            if(archived)
+                Toast.makeText(context, "Shopping list archived.", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(context, "Shopping list unarchived.", Toast.LENGTH_SHORT).show()
+        })
     }
 
     override fun onLongClick(item: Item) {
-        showDeleteItemDialog(item)
+        if(!viewModel.archived.value!!)
+            showDeleteItemDialog(item)
     }
 
     override fun onCheckIconClick(item: Item) {
-        if(!viewModel.archived!!) {
-            if (item.bought)
-                viewModel.undoBuyItem(item)
-            else
-                viewModel.buyItem(item)
-        }
+        if (item.bought)
+            viewModel.undoBuyItem(item)
+        else
+            viewModel.buyItem(item)
     }
 
-    private fun showAddNewDialog()
-    {
+    private fun showAddNewDialog() {
         val dialog = MaterialDialog(requireContext())
             .noAutoDismiss()
             .customView(R.layout.new_item_dialog)
