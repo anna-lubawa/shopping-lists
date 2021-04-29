@@ -20,6 +20,7 @@ class ItemsViewModel @Inject constructor(
     private val shoppingListRepository: ShoppingListRepository
 ) : ViewModel() {
 
+    var shouldShowToast = false
     var shoppingListId: Int? = null
     var shoppingListName: String? = null
 
@@ -83,6 +84,7 @@ class ItemsViewModel @Inject constructor(
 
     fun archiveOrUnarchiveShoppingList()
     {
+        shouldShowToast = true
         if(archived.value!!)
             unarchiveShoppingList()
         else

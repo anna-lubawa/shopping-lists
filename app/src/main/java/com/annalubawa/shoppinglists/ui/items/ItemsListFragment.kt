@@ -87,10 +87,14 @@ class ItemsListFragment : Fragment(), ItemsRecyclerAdapter.ItemClickListener {
         })
 
         viewModel.archived.observe(viewLifecycleOwner, Observer { archived ->
-            if(archived)
-                Toast.makeText(context, "Shopping list archived.", Toast.LENGTH_SHORT).show()
-            else
-                Toast.makeText(context, "Shopping list unarchived.", Toast.LENGTH_SHORT).show()
+            if(viewModel.shouldShowToast) {
+                if (archived)
+                    Toast.makeText(context, "Shopping list archived.", Toast.LENGTH_SHORT).show()
+                else
+                    Toast.makeText(context, "Shopping list unarchived.", Toast.LENGTH_SHORT).show()
+
+                viewModel.shouldShowToast = false
+            }
         })
     }
 
