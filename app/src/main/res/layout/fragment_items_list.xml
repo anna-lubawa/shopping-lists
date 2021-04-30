@@ -57,6 +57,15 @@
             tools:text="Archive"
             app:archiveTextBinding="@{viewmodel.archived}"/>
 
+        <View
+            android:id="@+id/archiveActionView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/archiveTextView"
+            app:layout_constraintEnd_toEndOf="@+id/archiveTextView"
+            app:layout_constraintStart_toStartOf="@+id/archiveTextView"
+            app:layout_constraintTop_toTopOf="@+id/archiveListIcon" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/itemsListRecyclerView"
             android:layout_width="0dp"

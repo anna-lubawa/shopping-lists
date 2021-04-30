@@ -71,11 +71,7 @@ class ItemsListFragment : Fragment(), ItemsRecyclerAdapter.ItemClickListener {
             showAddNewDialog()
         }
 
-        binding.archiveListIcon.setOnClickListener {
-            viewModel.archiveOrUnarchiveShoppingList()
-        }
-
-        binding.archiveTextView.setOnClickListener {
+        binding.archiveActionView.setOnClickListener {
             viewModel.archiveOrUnarchiveShoppingList()
         }
     }
