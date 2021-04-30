@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="16dp"
             app:cardElevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -67,13 +68,13 @@
                     android:layout_marginEnd="16dp"
                     android:ellipsize="end"
                     android:maxLines="1"
+                    android:text="@{item.name}"
                     android:textColor="@color/secondaryTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/checkIcon"
                     app:layout_constraintStart_toEndOf="@+id/itemIconCardView"
                     app:layout_constraintTop_toTopOf="@+id/itemIconCardView"
-                    android:text="@{item.name}"
                     tools:text="Item" />
 
                 <TextView
@@ -96,10 +97,10 @@
                     android:layout_marginTop="4dp"
                     android:textColor="@color/darkGray"
                     android:textSize="12sp"
+                    app:integerTextBinding="@{item.quantity}"
                     app:layout_constraintBottom_toBottomOf="@+id/quantityTextTextView"
                     app:layout_constraintStart_toEndOf="@+id/quantityTextTextView"
                     app:layout_constraintTop_toBottomOf="@+id/itemNameTextView"
-                    app:integerTextBinding="@{item.quantity}"
                     tools:text="3" />
 
                 <View
@@ -116,12 +117,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    app:checkIconBinding="@{item.bought}"
                     app:layout_constraintBottom_toBottomOf="@+id/itemIconCardView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/itemIconCardView"
-                    tools:srcCompat="@drawable/ic_check"
                     app:tint="@color/darkGray"
-                    app:checkIconBinding="@{item.bought}"/>
+                    tools:srcCompat="@drawable/ic_check" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
