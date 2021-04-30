@@ -10,5 +10,5 @@ data class ItemEntity(
     val shoppingListId: Int,
     val name: String,
     val quantity: Int,
-    val bought: Boolean
+    var bought: Boolean
 )
