@@ -1,9 +1,6 @@
 package com.annalubawa.shoppinglists.ui.current
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.annalubawa.shoppinglists.domain.model.ShoppingList
 import com.annalubawa.shoppinglists.domain.repository.ItemRepository
 import com.annalubawa.shoppinglists.domain.repository.ShoppingListRepository
@@ -19,16 +16,8 @@ class CurrentShoppingListsViewModel @Inject constructor(
     private val itemRepository: ItemRepository
 ) : ViewModel() {
 
-    private var _currentShoppingLists = MutableLiveData<List<ShoppingList>>()
-    val currentShoppingLists: LiveData<List<ShoppingList>> = _currentShoppingLists
-
-    fun getCurrentShoppingLists()
-    {
-        viewModelScope.launch(Dispatchers.IO) {
-            shoppingListRepository.getCurrentShoppingLists().collect { shoppingLists ->
-                _currentShoppingLists.postValue(shoppingLists)
-            }
-        }
+    val currentShoppingLists: LiveData<List<ShoppingList>> = liveData {
+        emitSource(shoppingListRepository.getCurrentShoppingLists().asLiveData())
     }
 
     fun addShoppingList(name: String)

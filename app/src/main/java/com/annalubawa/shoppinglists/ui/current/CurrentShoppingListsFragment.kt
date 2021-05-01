@@ -45,8 +45,6 @@ class CurrentShoppingListsFragment : Fragment(), ShoppingListsRecyclerAdapter.Sh
         initRecyclerView()
         setOnClickListeners()
         setObservers()
-
-        viewModel.getCurrentShoppingLists()
     }
 
     private fun initRecyclerView() {

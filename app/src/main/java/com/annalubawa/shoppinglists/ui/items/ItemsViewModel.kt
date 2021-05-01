@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.annalubawa.shoppinglists.domain.model.Item
-import com.annalubawa.shoppinglists.domain.model.ShoppingList
 import com.annalubawa.shoppinglists.domain.repository.ItemRepository
 import com.annalubawa.shoppinglists.domain.repository.ShoppingListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,6 +36,8 @@ class ItemsViewModel @Inject constructor(
 
         if(_archived.value == null)
             _archived.value = archived
+
+        getItems()
     }
 
     fun getItems() {

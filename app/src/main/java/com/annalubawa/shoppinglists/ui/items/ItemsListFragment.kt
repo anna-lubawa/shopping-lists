@@ -44,8 +44,6 @@ class ItemsListFragment : Fragment(), ItemsRecyclerAdapter.ItemClickListener {
         initRecyclerView()
         setOnClickListeners()
         initObservers()
-
-        viewModel.getItems()
     }
 
     private fun initNavigation(view: View) {

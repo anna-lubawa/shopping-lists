@@ -40,8 +40,6 @@ class ArchivedShoppingListsFragment : Fragment(), ShoppingListsRecyclerAdapter.S
         initViewModel()
         initRecyclerView()
         setObservers()
-
-        viewModel.getArchivedShoppingLists()
     }
 
     private fun initNavigation(view: View) {
