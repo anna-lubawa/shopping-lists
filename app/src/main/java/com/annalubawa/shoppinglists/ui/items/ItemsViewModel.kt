@@ -61,7 +61,8 @@ class ItemsViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             itemsRepository.deleteItem(item)
             shoppingListRepository.decrementTotalItems(shoppingListId!!)
-            shoppingListRepository.decrementBoughtItems(shoppingListId!!)
+            if(item.bought)
+                shoppingListRepository.decrementBoughtItems(shoppingListId!!)
         }
     }
 
